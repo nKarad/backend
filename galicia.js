@@ -53,31 +53,191 @@
 // const sanguchePollo = armarSanguche ("Pollito");
 // sanguchePollo ("tomate")
 
-function mostrarLista (lista) {
-    if (lista.leinght === 0) {
-        console.log ("lista vacia")
-    } else {
-        console.log (lista)
-    }
+// function mostrarLista (lista) {
+//     if (lista.leinght === 0) {
+//         console.log ("lista vacia")
+//     } else {
+//         console.log (lista)
+//     }
+// }
+
+// mostrarLista ([1, 2, 3])
+// mostrarLista ([]);
+
+// (function (lista) {
+//     if (lista.leinght === 0) {console.log ("lista vacia")
+// }
+//     else {console.log (lista)
+//     }
+
+// }
+//     )
+
+//     ([4,5,6])
+
+// ;
+
+
+// function crearMultiplicador (num1)
+// {return function (num2)
+// {return num1*num2}
+// }
+
+// const cuadriplicar =crearMultiplicador (4)
+
+// console.log (cuadriplicar (3))
+// console.log (cuadriplicar (10));
+
+
+
+// class Persona {
+//     constructor (nombre,apellido,direccion){
+//         this.nombre = nombre
+//         this.apellido = apellido
+//         this.direccion = direccion
+//     }
+
+//   mostrarNombre () {
+//     return `${this.nombre} ${this.apellido}`;
+// }
+// }
+// const persona1 =new Persona ('Carlo', 'Gomez','Av. Siempreviva 123')
+// const persona2 =new Persona ('Gomo', 'Carlez','Calle Falsa 123')
+// console.log (persona1, persona2);
+
+// console.log (persona1.mostrarNombre (), persona2.mostrarNombre())
+
+// class Contador {
+//     static cuentaGlobal = 0
+
+//     constructor(responsable){
+//         this.responsable=responsable
+//         this.cuentaIndividual= 0
+//     }
+
+//     obtenerResponsable(){
+//         return this.responsable
+//     }
+
+//     obtenerCuentaIndividual(){
+//     return this.cuentaIndividual}
+
+//     obtenerCuentaGlobal () {
+//     return Contador.cuentaGlobal
+//     }
+
+//     contar () {
+//         this.cuentaIndividual++
+//         Contador.cuentaGlobal++
+//     }
+// }
+
+// const r1 = new Contador (`res1`)
+// const r2 = new Contador (`res2`)
+
+// r1.contar ()
+// r1.contar ()
+// r1.contar () 
+// r1.contar ()
+// r1.contar ()
+// r1.contar ()
+// r1.contar () 
+// r1.contar ()
+
+// r2.contar ()
+// r2.contar ()
+// r2.contar () 
+
+// console.log (`r1 ind: ${r1.obtenerCuentaIndividual ()}`)
+// console.log (`r1 glob: ${r1.obtenerCuentaGlobal()}`)
+
+// console.log (`r2 ind: ${r2.obtenerCuentaIndividual ()}`)
+// console.log (`r2 glob: ${r2.obtenerCuentaGlobal ()}`)
+
+// class Usuario {
+//         constructor (nombre,apellido,mascotas,libros){
+//             this.nombre = nombre
+//             this.apellido = apellido
+//             this.mascotas = mascotas
+//             this.libros = libro
+//         }
+    
+//       getFullName () {
+//         return `El usuario es ${this.nombre} ${this.apellido} y sus mascotas son ${this.mascotas}`;
+//     }
+//     }
+//     const persona1 =new Usuario('Carlo', 'Gomez', 'Garfield y Chita')
+ 
+
+//     console.log (persona1.getFullName ())
+
+
+
+
+    
+
+class Usuario{
+  constructor(nombre, apellido, libros, mascotas){
+      this.nombre = nombre;
+      this.apellido = apellido;
+      this.mascotas = mascotas;
+      this.libros = libros;
+   
+  }
+
+  getFullName() {
+      return `Usuario: ${this.nombre} ${this.apellido}.`;
+  }
+
+  addmascota(newMascota){
+      this.mascotas.push(newMascota);
+  }
+
+  getMascotas(){
+      return this.mascotas.length;
+  }
+
+  addBook(book, autor){
+      this.libros.push( {
+          "nombre": book,
+          "autor": autor
+      });
+  }
+
+  getBooks(){
+      let getBookNames = []
+      this.libros.forEach(item => getBookNames.push(item.nombre));
+      return getBookNames;
+  }
 }
 
-mostrarLista ([1, 2, 3])
-mostrarLista ([]);
+let mascotas = ["Juan el gato", "Ricardo, no sabemos qué es", "Juany"];
 
-(function (lista) {
-    if (lista.leinght === 0) {console.log ("lista vacia")
-}
-    else {console.log (lista)
-    }
+let libros = [
+  {
+  "nombre": "Harry Potter",
+  "autor": "Rowling"
+  },
+  {
+  "nombre": "El Señor de los Anillos",
+  "autor": "JJR Tolkien"
+  },
+  {
+    "nombre": "IT",
+    "autor": "Stevie King"
+    }]
 
-}
-    )
+let usuario = new Usuario("Nicolas","Caradzoglu", libros, mascotas);
+console.log(usuario.getFullName());
 
-    ([4,5,6])
+usuario.addmascota("Homero el perro");
+usuario.addmascota("Daryl el perro 2");
 
-;
 
 
-function crearMultiplicador (num1)
-{return}
-const cuadruplicar = 
+console.log(`Cantidad de Mascotas: ${ usuario.getMascotas() }.`);
+
+usuario.addBook("Alguno de Salinger","Salinger")
+
+
+console.log(usuario.getBooks());
