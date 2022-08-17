@@ -1,0 +1,7 @@
+
+  [
+    { "id": 1, "equipo" : "Chicago Bulls", "numeroEspalda": "21" }
+    ]
+    
+  
+  
