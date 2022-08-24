@@ -1,50 +1,33 @@
-//Dudas: Linea 32
 
-const fs = require("fs");
+const fs = require('fs/promises'); 
 
 class Jerseys {
   constructor(ruta) {
     this.ruta = ruta;
   }
 
-
-
-
-
-
-
-  //                                                        Lista objs del JSON parseados
   async listarAll() {
     try {
-      const objs = await fs.promises.readFile(this.ruta, "utf-8");
-      // console.log (objs)
-      // console.log (JSON.parse (objs))
+     
+      const objs = await fs.readFile(this.ruta, 'utf-8'); 
       return JSON.parse(objs);
     } catch (error) {
       return [];
     }
   }
 
-
-
-
-
-
-  //                                                        Guardado
-
   async guardar(obj) {
     try {
       const objs = await this.listarAll();
       let newId;
 
-      if (objs.lenght === 0) {
+      if (objs.length === 0) {
         newId = 1;
       } else {
-        newId = objs[objs.lenght - 1].id + 1;
-      } //cuando pongo [objs.length-1].id -1 en vez de un NotaNumber me tira que id es undefined
-      //se lo puede leer.
+        newId = objs[objs.length - 1].id + 1;
+      }
 
-      console.log("newId", newId);
+      console.log('newId', newId);
 
       const newObj = {
         id: newId,
@@ -55,26 +38,16 @@ class Jerseys {
 
       return newId;
     } catch (error) {
-      console.log("error al guardar");
+      console.log('error al guardar', error); // saco el error por consola para poder saber a que se debe el fallo
     }
   }
 
-
-
-
-
-
-
-
-
-
-  //                                                        Actualizar
   async actualizar(id, newObj) {
     try {
       const objs = await this.listarAll();
       const indexObj = objs.findIndex((o) => o.id == id);
       if (indexObj == -1) {
-        return 'Objeto no encontrado'
+        return 'Objeto no encontrado';
       } else {
         objs[indexObj] = {
           id,
@@ -86,53 +59,61 @@ class Jerseys {
       return {
         id,
         ...newObj
-      }
+      };
     } catch (error) {
-      console.log("error actualizar")
-
+      console.log('error actualizar', error); // saco el error por consola
     }
   }
 
-
-
-
-
-  //                                                     Eliminar
   async eliminar(id) {
     try {
       const objs = await this.listarAll();
       const indexObj = objs.findIndex((o) => o.id == id);
 
       if (indexObj == -1) {
-        return 'No encontrado'
+        return 'No encontrado';
       } else {
         objs.splice(indexObj, 1);
         await fs.writeFile(this.ruta, JSON.stringify(objs, null, 2));
       }
     } catch (error) {
-      return ("error actualizar")
+      console.log('error eliminar', error); // saco el error por consola
     }
   }
-};
 
 
+  async eliminarTodo(){
+    try{
+        await fs.writeFile(this.ruta,"[]","utf-8");
+    }
+    catch(error){
+
+       console.log ( `error eliminar todo: ${error}`);
+    }
+}
 
 
+}
 
-//                                            Logs
 async function main() {
-  const jereys = new Jerseys ("./jerseys-data.txt");
+  const jereys = new Jerseys('./jerseys-data.txt');
   console.log(jereys.ruta);
   console.log(await jereys.listarAll());
-  console.log(await jereys.guardar({
-    equipo: "Chicago Bulls",
-    numeroEspalda: "21"
-  }));
-  console.log(await jereys.actualizar());
-  console.log(await jereys.eliminar(2, {
-    equipo: "Spurs",
-    numeroEspalda: "27"
-  }));
+  console.log(
+    await jereys.guardar({
+      equipo: 'Chicago Bullssss',
+      numeroEspalda: '21'
+    })
+  );
+  console.log(
+    await jereys.actualizar(2, {
+      equipo: 'Spurs',
+      numeroEspalda: '27'
+    })
+  );
+
+
+  //  console.log(await jereys.eliminar(1));
 }
 
 main();
